@@ -1,14 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>sbGame</title>
-    <link rel="stylesheet" href="/css/indexstyle.css">
-</head>
-<body>
-    
+    <link rel="stylesheet" href="/css/indexstyle.css" />
+  </head>
+  <body>
+    <header>
+      <h1>ברוכים הבאים</h1>
+      <h2>sbGames</h2>
+    </header>
 
- 
-</body>
+    <div class="Userlogin">
+      <div class="container">
+        <h2>התחברות</h2>
+        <form action="">
+          <div class="input-group">
+            <label for="user">שם משתמש</label>
+            <input type="text" id="user" name="user" required />
+          </div>
+          <div class="input-group">
+            <label for="password">סיסמה</label>
+            <input type="password" id="password" name="password" required />
+          </div>
+          <button type="submit" class="button" id="login">התחבר</button>
+        </form>
+        <div class="footer" style="display: block">
+          <p>?אין לך חשבון</p>
+          <button type="submit" class="button" id="Signp1">הירשם</button>
+        </div>
+      </div>
+    </div>
+    <div class="UserSginup">
+      <div class="container">
+        <form action="">
+          <div class="input-group">
+            <label for="firstNema">שם פרטי</label>
+            <input type="text" id="firstNema" name="firstNema" required />
+            <label for="LastNema">שם משפחה</label>
+            <input type="text" id="LastNema" name="LastNema" required />
+            <label for="email">כתובת אימייל</label>
+            <input type="email" id="email" name="email" required />
+            <label for="username">שם משתמש</label>
+            <input type="text" id="username" name="username" required />
+            <label for="pasword">סיסמה</label>
+            <input type="text" id="pasword" name="pasword" required />
+          </div>
+          <button type="submit" class="button" id="Signp2">הירשם</button>
+        </form>
+      </div>
+    </div>
+
+    
+    <script src="/js/index.js"></script>
+  </body>
 </html>

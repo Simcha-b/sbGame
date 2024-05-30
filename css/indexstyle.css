@@ -1,7 +1,96 @@
-* {
-    padding: 0;
+/* Reset some default styles */
+body, html {
     margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+body{
+    background: linear-gradient(to right, #00c6ff, #0072ff);
+}
+header{
+    text-align: center;
+}
+.Userlogin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.UserSginup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.container {
+
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    width: 300px;
+    text-align: center;
+}
+
+.container h2 {
+    margin-bottom: 20px;
+    color: #0072ff;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
     box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
-  }
-  
+}
+
+.input-group input:focus {
+    border-color: #0072ff;
+    outline: none;
+}
+
+.button {
+    background: #0072ff;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    transition: background 0.3s ease;
+}
+
+.button:hover {
+    background: #005bb5;
+}
+
+.footer {
+    margin-top: 20px;
+    color: #777;
+}
+
+.footer a {
+    color: #0072ff;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+.UserSginup{
+    display: none;
+}
