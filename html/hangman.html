@@ -9,38 +9,37 @@
   </head>
   <body>
     <div id="game-inst">
-        <div id="options-container">
-        <h1>hangman!! </h1>
-          <p class="insroction">
-            <strong>הוראות המשחק</strong>
-            <p>יש לנחש את אותיות המילה בלחיצה על המקש המתאים במקלדת</p>
-            <p>אם האות נמצאת במילה היא תכנס למקום המתאים</p>
-          </p>
-          <h3>(אורך המילה) בחר את רמת  המשחק</h3>
-          <button class="easy">קל</button>
-          <button  class="medium">בינוני</button>
-          <button class="Hard">קשה</button>
-        </div>
-
-        </div>
+      <div id="options-container">
+        <h1>hangman!!</h1>
+        <p class="insroction">
+          <strong>הוראות המשחק</strong>
+        </p>
+        <p>יש לנחש את אותיות המילה בלחיצה על המקש המתאים במקלדת</p>
+        <p>אם האות נמצאת במילה היא תכנס למקום המתאים</p>
+        <h3>(אורך המילה) בחר את רמת המשחק</h3>
+        <button class="easy">קל</button>
+        <button class="medium">בינוני</button>
+        <button class="Hard">קשה</button>
+      </div>
+    </div>
     <div class="game-container">
       <div id="letter-container"></div>
       <div id="user-input-section"></div>
       <!-- <div id="hangman-section"> -->
-        <div id="hangman-container">
-          <div id="gallows">
-              <div class="part vertical-pole"></div>
-              <div class="part horizontal-pole"></div>
-              <div class="part rope"></div>
-          </div>
-          <div id="man">
-              <div class="part head"></div>
-              <div class="part body"></div>
-              <div class="part left-arm"></div>
-              <div class="part right-arm"></div>
-              <div class="part left-leg"></div>
-              <div class="part right-leg"></div>
-          </div>
+      <div id="hangman-container">
+        <div id="gallows">
+          <div class="part vertical-pole"></div>
+          <div class="part horizontal-pole"></div>
+          <div class="part rope"></div>
+        </div>
+        <div id="man">
+          <div class="part head"></div>
+          <div class="part body"></div>
+          <div class="part left-arm"></div>
+          <div class="part right-arm"></div>
+          <div class="part left-leg"></div>
+          <div class="part right-leg"></div>
+        </div>
       </div>
       <div id="winn" class="modal">
         <div class="modal-content">
@@ -49,13 +48,13 @@
         </div>
       </div>
       <div id="gameover" class="modal">
-          <div class="modal-content">
-            <span class="close">&times;</span>
-            <p>סוף משחק</p>
-            <button class="nuwgame">משחק חדש</button>
-          </div>
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <p>סוף משחק</p>
+          <button class="nuwgame">משחק חדש</button>
         </div>
       </div>
+    </div>
     <script src="/js/hangman.js"></script>
   </body>
 </html>

@@ -20,7 +20,7 @@ let word = "";
 
 const optionscontainer = document.querySelector("#options-container");
 const userinput = document.querySelector("#user-input-section");
-const hangmanContainer = document.querySelector('#hangman-container');
+const hangmanContainer = document.querySelector("#hangman-container");
 optionscontainer.addEventListener("click", play);
 
 function play(e) {
@@ -44,51 +44,48 @@ letterContainer.addEventListener("click", play2);
 function play2(e) {
   let cl = e.target.classList[0];
   if (word.includes(cl)) {
-
     let userchos = userinput.querySelectorAll(`.${cl}`);
     for (let j = 0; j < userchos.length; j++) {
       userchos[j].textContent = cl;
     }
-    e.target.textContent = "";
+    e.target.style.visibility = "hidden";
   } else {
     drawNextPart();
-      //הקפצת הודעת הפסד ומשחק חדש
-    }
   }
+}
 
-const parts = document.querySelectorAll('.part');
-
+const parts = document.querySelectorAll(".part");
 let mistakes = 0;
-
 const win = document.querySelector("#winn");
 const gameover = document.querySelector("#gameover");
 
 function drawNextPart() {
-    if (mistakes < parts.length) {
-        parts[mistakes].style.display = 'block';
-        mistakes++;
-    } else {
-      gameover.display = "block"
-    }
+  if (mistakes < parts.length) {
+    parts[mistakes].style.display = "block";
+    mistakes++;
+  } else {
+    gameover.style.display = "block";
+  }
 }
-
 
 // Get the modal
 const modal = document.getElementById("winn");
 // Get the <span> element that closes the modal
 const span = document.getElementsByClassName("close")[0];
 // When the user clicks on <span> (x), close the modal
+
 span.onclick = function () {
   modal.style.display = "none";
-      location.reload();
+  location.reload();
 };
+
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
 };
-// Get the modal
+
 // Get the <span> element that closes the modal
 const span2 = document.getElementsByClassName("close")[1];
 // When the user clicks on <span> (x), close the modal
@@ -101,5 +98,3 @@ window.onclick = function (event) {
     gameover.style.display = "none";
   }
 };
-
-
