@@ -71,7 +71,7 @@ header{
     cursor: pointer;
     width: 100%;
     font-size: 16px;
-    transition: background 0.3s ease;
+    /* transition: background 0.3s ease; */
 }
 
 .button:hover {

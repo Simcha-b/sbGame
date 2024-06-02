@@ -1,23 +1,201 @@
 body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
 }
-#letter-container {
-    width: 100%;
+.game-container{
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.6em;
+    flex-direction: column;
+    align-items: center;
+}
+#letter-container {
+    /* text-align: center; */
+    /* gap: 0.6em; */
+    margin-top: 30px;
+    width: 50%;
+    /* background-color:; */
+    /* border: black 2px solid; */
   }
   #letter-container button {
-    height: 2.4em;
-    width: 2.4em;
+    margin: 5px;
+    /* height: 2.4em;
+    width: 2.4em; */
+    height: 30px;
+    width: 30px;
     border-radius: 0.3em;
     background-color: #ffffff;
     cursor: pointer;
+
   }
+  #letter-container button:hover{
+    background-color: aquamarine;
+  }
+
   #user-input-section {
+    padding: 20px;
     display: flex;
     justify-content: center;
     font-size: 1.8em;
     margin: 0.6em 0 1.2em 0;
+  }
+  #user-input-section div{
+    display: flex;
+    justify-content: center;
+    border: black 2px solid;
+    margin: 10px;
+    height: 40px;
+    width: 40px;
+    background-color: white;
+  }
+
+
+  
+  #hangman-container {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    height: 450px;
+    width: 380px;
+    position: relative;
+    border: 2px black solid;
+    background-color: bisque;
+}
+
+#gallows {
+    position: relative;
+}
+
+.vertical-pole {
+    width: 10px;
+    height: 225px;
+    background-color: black;
+    position: relative;
+    left:40px;
+}
+
+.horizontal-pole {
+    width: 100px;
+    height: 10px;
+    background-color: black;
+    position: relative;
+    left: 40px;
+}
+
+.rope {
+    width: 2px;
+    height: 40px;
+    background-color: black;    
+    position: relative;
+    left: 140px;
+}
+
+#man {
+    position: relative;
+    left: 100px;
+}
+
+.part {
+    display: none;
+    position: absolute;
+}
+
+.head {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid black;
+    top: 40px;
+    left: 25px;
+}
+
+.body {
+    width: 2px;
+    height: 60px;
+    background: black;
+    top: 70px;
+    left: 39px;
+}
+
+.left-arm, .right-arm {
+    width: 40px;
+    height: 2px;
+    background: black;
+    top: 90px;
+}
+
+.left-arm {
+    transform: rotate(-45deg);
+    left: 0px;
+}
+
+.right-arm {
+    transform: rotate(45deg);
+    left: 40px;
+}
+
+.left-leg, .right-leg {
+    width: 40px;
+    height: 2px;
+    background: black;
+    top: 130px;
+}
+
+.left-leg {
+    transform: rotate(-45deg);
+    left: 10px;
+}
+
+.right-leg {
+    transform: rotate(45deg);
+    left: 40px;
+}
+
+ /* The Modal (background) */
+ .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    font-size: 20px;
+    background-color: #a47e7e;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@keyframes animatetop {
+  from {top: -300px; opacity: 0}
+  to {top: 0; opacity: 1}
+}
+
+
+  /* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
   }
