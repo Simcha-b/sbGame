@@ -39,6 +39,10 @@ function play(e) {
   }
 }
 const hangmansection = document.querySelector("#hangman-section");
+let cntwin = 0;
+const win = document.querySelector("#winn");
+const gameover = document.querySelector("#gameover");
+
 
 letterContainer.addEventListener("click", play2);
 function play2(e) {
@@ -46,9 +50,15 @@ function play2(e) {
   if (word.includes(cl)) {
     let userchos = userinput.querySelectorAll(`.${cl}`);
     for (let j = 0; j < userchos.length; j++) {
+      //הכנס למשבצת את האות המתאימה
       userchos[j].textContent = cl;
+      cntwin++;
     }
     e.target.style.visibility = "hidden";
+
+    if(cntwin==word.length){
+    win.style.display = "block";
+    }
   } else {
     drawNextPart();
   }
@@ -56,9 +66,6 @@ function play2(e) {
 
 const parts = document.querySelectorAll(".part");
 let mistakes = 0;
-const win = document.querySelector("#winn");
-const gameover = document.querySelector("#gameover");
-
 function drawNextPart() {
   if (mistakes < parts.length) {
     parts[mistakes].style.display = "block";
@@ -67,6 +74,12 @@ function drawNextPart() {
     gameover.style.display = "block";
   }
 }
+
+const nuwgame = document.querySelector(".nuwgame");
+
+nuwgame.addEventListener("click", function(){
+  window.location.reload();
+})
 
 // Get the modal
 const modal = document.getElementById("winn");

@@ -17,14 +17,15 @@
         <h2>התחברות</h2>
         <form action="">
           <div class="input-group">
-            <label for="user">שם משתמש</label>
+            <label for="user"><span style="color: red;">*</span> :שם משתמש</label>
             <input type="text" id="user" name="user" required />
           </div>
           <div class="input-group">
-            <label for="password">סיסמה</label>
+            <label for="password"><span style="color: red;">*</span> :סיסמה</label>
             <input type="password" id="password" name="password" required />
           </div>
           <button type="submit" class="button" id="login">התחבר</button>
+          <p class="passwordWrong" style="display: none; color: red">שם משתמש או סיסמה שגויים</p>
         </form>
         <div class="footer" style="display: block">
           <p>?אין לך חשבון</p>
@@ -45,7 +46,7 @@
             <label for="username">שם משתמש</label>
             <input type="text" id="username" name="username" required />
             <label for="pasword">סיסמה</label>
-            <input type="text" id="pasword" name="pasword" required />
+            <input type="password" id="pasword" name="pasword" required />
           </div>
           <button type="submit" class="button" id="Signp2">הירשם</button>
         </form>
