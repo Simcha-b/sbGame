@@ -1,10 +1,12 @@
 "use strike";
-
+//מערך הרמות עם המילים
 let options = {
   easy: ["Apple", "Banana", "Mango", "Lemon", "Grape"],
   medium: ["Bicycle", "Airplane", "Scooter", "Subway", "Sailboat"],
   Hard: ["Argentina", "Indonesia", "Switzerland", "Kazakhstan", "Philippines"],
 };
+
+//פונקציית בניית המקלדת
 const letterContainer = document.querySelector("#letter-container");
 let leeters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 function criateleters() {
@@ -16,17 +18,25 @@ function criateleters() {
   }
 }
 
+//המילה שתיבחר רנדומלית
 let word = "";
 
+//הכפתורים של הרמות
 const optionscontainer = document.querySelector("#options-container");
+
+//הקוביות של הניחושים
 const userinput = document.querySelector("#user-input-section");
+
+//איזור האיש התולה
 const hangmanContainer = document.querySelector("#hangman-container");
 optionscontainer.addEventListener("click", play);
 
 function play(e) {
   optionscontainer.style.display = "none";
   hangmanContainer.style.display = "flex";
+
   criateleters();
+
   let level = e.target.classList[0];
   let levelArry = options[level];
   word = levelArry[Math.floor(Math.random() * levelArry.length)];
@@ -43,7 +53,6 @@ let cntwin = 0;
 const win = document.querySelector("#winn");
 const gameover = document.querySelector("#gameover");
 
-
 letterContainer.addEventListener("click", play2);
 function play2(e) {
   let cl = e.target.classList[0];
@@ -56,8 +65,8 @@ function play2(e) {
     }
     e.target.style.visibility = "hidden";
 
-    if(cntwin==word.length){
-    win.style.display = "block";
+    if (cntwin == word.length) {
+      win.style.display = "block";
     }
   } else {
     drawNextPart();
@@ -69,7 +78,7 @@ let mistakes = 0;
 function drawNextPart() {
   if (mistakes < parts.length) {
     parts[mistakes].style.display = "block";
-    mistakes++;
+    ++mistakes;
   } else {
     gameover.style.display = "block";
   }
@@ -77,9 +86,9 @@ function drawNextPart() {
 
 const nuwgame = document.querySelector(".nuwgame");
 
-nuwgame.addEventListener("click", function(){
+nuwgame.addEventListener("click", function () {
   window.location.reload();
-})
+});
 
 // Get the modal
 const modal = document.getElementById("winn");

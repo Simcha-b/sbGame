@@ -1,53 +1,138 @@
+//מערך שיכיל את כל פרטי המשתמשים
 let usersData = [];
-// localStorage.setItem("usersData", JSON.stringify(usersData));
 
+//תיבת התחברות
 const login = document.querySelector(".Userlogin");
 //כפתור התחברות
 const login_b = document.querySelector("#login");
 
-const signp = document.querySelector(".UserSginup");
-//כפתור הרשם שמעביר להרשמה
+//הודעת שגיאה
+const passwordWrong = document.querySelector(".passwordWrong");
+
+//פונקציית בדיקת נכונות סיסמה ושם משתמש
+login_b.addEventListener("click", function (e) {
+  e.preventDefault();
+  passwordWrong.style.display = "none";
+
+  let username = document.querySelector("#user");
+  let password = document.querySelector("#password1");
+
+  usersData = JSON.parse(localStorage.getItem("usersData") || []);
+
+  //אם שם משתמש וסיסמה נכונים מעבר לדף נחיתה
+  let user = usersData.find(
+    (user) => user.username === username && user.password === password
+  );
+
+  if (user) {
+    sessionStorage.setItem("loggedInUser", JSON.stringify(username.value));
+    document.querySelector(".wolcomback").style.display = "block";
+    setTimeout(function () {
+      username.value = "";
+      window.location.href = "/html/landingpage.html";
+    }, 2000);
+  } else {
+    passwordWrong.style.display = "block";
+  }
+});
+//כפתור הרשם שמעביר למסך ההרשמה
 const signp1_b = document.querySelector("#Signp1");
-//כפתור הרשם ששולח את הפרטים
-const signp2_b = document.querySelector("#Signp2");
-//מעביר למסך הרשמה
+
+//תיבת הרשמה
+const signp = document.querySelector(".UserSginup");
+
+//פונקציית מעבר למסך הרשמה
 signp1_b.addEventListener("click", function () {
   signp.style.display = "flex";
   login.style.display = "none";
 });
-//יצירת משתמש והכנסה לזכרון
+
+//כפתור סיום הרשמה
+const signp2_b = document.querySelector("#Signp2");
+
+//הודעת שם משתמש קיים כבר
+const usernameExists = document.querySelector(".usernameExists");
+//הודעת סיסמה אינה תקינה
+const unvalidpassword = document.querySelector(".unvalidPassword");
+//הודעת הצלחת רישום
+const signpSuccess = document.querySelector(".signpSuccess");
+
+//פונקציית יצירת משתמש והכנסה לזכרון
 signp2_b.addEventListener("click", function (e) {
   e.preventDefault();
+
+  //בדיקה האם קיים כבר כזה משתמש
+  if (!validateUsername(document.querySelector("#username").value)) {
+    usernameExists.style.display = "block";
+    return;
+  } else {
+    usernameExists.style.display = "none";
+  }
+  //בדיקה האם הסיסמה חוקית
+  if (!validatePassword(document.querySelector("#password2").value)) {
+    unvalidpassword.style.display = "block";
+    return;
+  } else {
+    unvalidpassword.style.display = "none";
+  }
+
+  //יצירת האובייקט
   let user = {
-    firstNema: document.querySelector("#firstNema").value,
-    LastNema: document.querySelector("#LastNema").value,
+    firstName: document.querySelector("#firstName").value,
+    LastName: document.querySelector("#LastName").value,
     email: document.querySelector("#email").value,
     username: document.querySelector("#username").value,
-    pasword: document.querySelector("#pasword").value,
+    password: document.querySelector("#password2").value,
+    score: 0,
   };
-  usersData = JSON.parse(localStorage.getItem("usersData"));
+
+  //שליפת המערך מהזכרון הפנימי
+  usersData = JSON.parse(localStorage.getItem("usersData") || []);
+
+  //הכנסת המשתמש לזכרון
   usersData.push(user);
   localStorage.setItem("usersData", JSON.stringify(usersData));
-  //לכתוב פה הודעת רישום בהצלחה
-  signp.style.display = "none";
-  login.style.display = "flex";
+
+  //הצגת הודעה נרשמת בהצלחה
+  signpSuccess.style.display = "block";
+
+  //חזרה למסך התחברות
+  setTimeout(function () {
+    signp.style.display = "none";
+    login.style.display = "flex";
+  }, 1000);
 });
 
-const passwordWrong = document.querySelector(".passwordWrong");
+//פונקציית בדיקת שם משתמש יחודי
+function validateUsername(username) {
+  usersData = JSON.parse(localStorage.getItem("usersData") || []);
 
-login_b.addEventListener("click", function (e) {
-  e.preventDefault();
-  let username = document.querySelector("#user");
-  let pasword = document.querySelector("#password");
-  usersData = JSON.parse(localStorage.getItem("usersData"));
-  usersData.forEach((user) => {
-    if (user.username === username.value && user.pasword === pasword.value) {
-      setTimeout(function() {
-        username.value = "";
-        window.location.href = "/html/hangman.html";
-      }, 2000);
-    } else {
-      passwordWrong.style.display = "block";
+  for (let index = 0; index < usersData.length; index++) {
+    const user = usersData[index];
+    if (user.username === username) {
+      return false;
     }
-  });
-});
+  }
+  return true;
+}
+
+// פונקציית בדיקת חוקיות סיסמה
+function validatePassword(password) {
+  const regex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^&*]).{6,}$/;
+  return regex.test(password);
+}
+
+// function validatePassword(password) {
+//   if (password.length < 6) return false;
+//   if (
+//     password.includes("!") ||
+//     password.includes("@") ||
+//     password.includes("#") ||
+//     password.includes("$") ||
+//     password.includes("^") ||
+//     password.includes("&") ||
+//     password.includes("*")
+//   )
+//     return true;
+//   return false;
+// }

@@ -1,0 +1,14 @@
+.user-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.user-info span {
+    margin-right: 10px;
+}
+.games {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>sbGame</title>
+    <title>sbGames</title>
     <link rel="stylesheet" href="/css/indexstyle.css" />
   </head>
   <body>
     <header>
-      <h1>ברוכים הבאים</h1>
+      <h1>Hi!!</h1>
       <h2>sbGames</h2>
     </header>
 
@@ -22,10 +22,12 @@
           </div>
           <div class="input-group">
             <label for="password"><span style="color: red;">*</span> :סיסמה</label>
-            <input type="password" id="password" name="password" required />
+            <input type="password" id="password1" name="password" required />
           </div>
           <button type="submit" class="button" id="login">התחבר</button>
           <p class="passwordWrong" style="display: none; color: red">שם משתמש או סיסמה שגויים</p>
+          <p class="wolcomback" style="display: none; color: green">!ברוך שובך</p>
+        </p>
         </form>
         <div class="footer" style="display: block">
           <p>?אין לך חשבון</p>
@@ -37,23 +39,24 @@
       <div class="container">
         <form action="">
           <div class="input-group">
-            <label for="firstNema">שם פרטי</label>
-            <input type="text" id="firstNema" name="firstNema" required />
-            <label for="LastNema">שם משפחה</label>
-            <input type="text" id="LastNema" name="LastNema" required />
+            <label for="firstName">שם פרטי</label>
+            <input type="text" id="firstName" name="firstName" required />
+            <label for="LastName">שם משפחה</label>
+            <input type="text" id="LastName" name="LastName" required />
             <label for="email">כתובת אימייל</label>
             <input type="email" id="email" name="email" required />
             <label for="username">שם משתמש</label>
             <input type="text" id="username" name="username" required />
-            <label for="pasword">סיסמה</label>
-            <input type="password" id="pasword" name="pasword" required />
+            <label for="password">סיסמה</label>
+            <input type="password" id="password2" name="password" required  placeholder="לפחות 6 תווים אות באנגלית ותו (!@#$%^&*) אחד"/>
           </div>
           <button type="submit" class="button" id="Signp2">הירשם</button>
+          <p class="usernameExists" style="display: none; color: red">שם משתמש קיים כבר!, נסה שוב</p>
+          <p class="unvalidPassword" style="display: none; color: red">!סיסמה לא חוקית</p>
+          <p class="signpSuccess" style="display: none; color: green">!הרשמה הושלמה בהצלחה</p>
         </form>
       </div>
     </div>
-
-    
     <script src="/js/index.js"></script>
   </body>
 </html>
