@@ -1,4 +1,42 @@
-"use strike";
+"use strict";
+
+//מניעת כניסה למשתמש לא רשום
+if (!localStorage.getItem("currentUser")) {
+  window.location.href = "/index.html";
+}
+
+//פרטי משתמש נוכחי
+const currentUser = localStorage.getItem("currentUser");
+const userData = JSON.parse(localStorage.getItem(currentUser));
+
+// הצגת פרטי המשתמש
+let username = document.querySelector("#username");
+let score = document.querySelector("#score");
+username.textContent = `plyaer: ${currentUser}`;
+score.textContent = `score: ${userData.score}`;
+
+//ניתוק
+document.getElementById("logout").addEventListener("click", function () {
+  sessionStorage.removeItem("currentUser");
+  window.location.href = "/index.html";
+});
+
+//חזרה לבחירת משחק
+document.querySelector("#home").addEventListener("click", function () {
+  window.location.href = "/html/landingpage.html";
+});
+//הצגת הוראות
+document
+  .querySelector("#insroction_b")
+  .addEventListener("mouseover", function () {
+    document.querySelector(".insroction").style.display = "block";
+  });
+document
+  .querySelector("#insroction_b")
+  .addEventListener("mouseout", function () {
+    document.querySelector(".insroction").style.display = "none";
+  });
+
 //מערך הרמות עם המילים
 let options = {
   easy: ["Apple", "Banana", "Mango", "Lemon", "Grape"],
@@ -10,6 +48,7 @@ let options = {
 const letterContainer = document.querySelector("#letter-container");
 let leeters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 function criateleters() {
+  letterContainer.innerHTML = "";
   for (let i = 0; i < leeters.length; i++) {
     let div = document.createElement("button");
     div.textContent = leeters[i];
@@ -22,22 +61,21 @@ function criateleters() {
 let word = "";
 
 //הכפתורים של הרמות
-const optionscontainer = document.querySelector("#options-container");
-
+const levels = document.querySelector("#levels");
 //הקוביות של הניחושים
 const userinput = document.querySelector("#user-input-section");
 
 //איזור האיש התולה
 const hangmanContainer = document.querySelector("#hangman-container");
-optionscontainer.addEventListener("click", play);
 
-function play(e) {
-  optionscontainer.style.display = "none";
+levels.addEventListener("change", play);
+//בחירת רמה והתחלת משחק
+function play() {
   hangmanContainer.style.display = "flex";
-
+  resetGame();
   criateleters();
 
-  let level = e.target.classList[0];
+  let level = levels.value;
   let levelArry = options[level];
   word = levelArry[Math.floor(Math.random() * levelArry.length)];
   word = word.toUpperCase();
@@ -48,11 +86,13 @@ function play(e) {
     userinput.append(div);
   }
 }
+
 const hangmansection = document.querySelector("#hangman-section");
 let cntwin = 0;
 const win = document.querySelector("#winn");
 const gameover = document.querySelector("#gameover");
 
+//ניחוש אות
 letterContainer.addEventListener("click", play2);
 function play2(e) {
   let cl = e.target.classList[0];
@@ -63,60 +103,94 @@ function play2(e) {
       userchos[j].textContent = cl;
       cntwin++;
     }
+    //העלמת האות מהמקלדת
     e.target.style.visibility = "hidden";
 
+    //נצחון
     if (cntwin == word.length) {
       win.style.display = "block";
+      updateScore(userData.score + 5);
+      playWinSound();
     }
   } else {
+    //ציור האיש
     drawNextPart();
   }
 }
 
+//פונקציית ציור האיש
 const parts = document.querySelectorAll(".part");
 let mistakes = 0;
 function drawNextPart() {
   if (mistakes < parts.length) {
     parts[mistakes].style.display = "block";
-    ++mistakes;
-  } else {
-    gameover.style.display = "block";
+    mistakes++;
+
+    //הפסד
+    if (mistakes == parts.length) {
+      gameover.style.display = "block";
+      playLoseSound();
+    }
   }
 }
 
 const nuwgame = document.querySelector(".nuwgame");
-
+//התחלת משחק חוזר
 nuwgame.addEventListener("click", function () {
   window.location.reload();
 });
 
-// Get the modal
 const modal = document.getElementById("winn");
-// Get the <span> element that closes the modal
 const span = document.getElementsByClassName("close")[0];
-// When the user clicks on <span> (x), close the modal
 
 span.onclick = function () {
   modal.style.display = "none";
   location.reload();
 };
 
-// When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
 };
 
-// Get the <span> element that closes the modal
 const span2 = document.getElementsByClassName("close")[1];
-// When the user clicks on <span> (x), close the modal
 span2.onclick = function () {
   gameover.style.display = "none";
 };
-// When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
   if (event.target == gameover) {
     gameover.style.display = "none";
   }
 };
+
+//ניקוי המשחק
+function resetGame() {
+  userinput.innerHTML = "";
+  hangmanContainer
+    .querySelectorAll(".part")
+    .forEach((part) => (part.style.display = "none"));
+  mistakes = 0;
+  cntwin = 0;
+}
+//עדכון הציון
+function updateScore(newScore) {
+  const currentUser = localStorage.getItem("currentUser");
+  if (currentUser) {
+    let userData = JSON.parse(localStorage.getItem(currentUser));
+    userData.score = newScore;
+    localStorage.setItem(currentUser, JSON.stringify(userData));
+  }
+}
+
+//play win
+function playWinSound() {
+  const winSound = document.getElementById("winSound");
+  winSound.play();
+}
+
+// פונקציה לניגון צליל הפסד
+function playLoseSound() {
+  const loseSound = document.getElementById("loseSound");
+  loseSound.play();
+}

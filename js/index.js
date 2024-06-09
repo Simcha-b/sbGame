@@ -1,3 +1,5 @@
+"use strict";
+
 //מערך שיכיל את כל פרטי המשתמשים
 let usersData = [];
 
@@ -13,22 +15,27 @@ const passwordWrong = document.querySelector(".passwordWrong");
 login_b.addEventListener("click", function (e) {
   e.preventDefault();
   passwordWrong.style.display = "none";
+  let username = document.querySelector("#user").value;
+  let password = document.querySelector("#password1").value;
 
-  let username = document.querySelector("#user");
-  let password = document.querySelector("#password1");
-
-  usersData = JSON.parse(localStorage.getItem("usersData") || []);
+  usersData = JSON.parse(localStorage.getItem("usersData"))||[];
 
   //אם שם משתמש וסיסמה נכונים מעבר לדף נחיתה
-  let user = usersData.find(
-    (user) => user.username === username && user.password === password
-  );
-
-  if (user) {
-    sessionStorage.setItem("loggedInUser", JSON.stringify(username.value));
+  let flag = false;
+  usersData.forEach((user) => {
+    if (user.username === username && user.password === password) {
+      //הכנסת משתמש נוכחי לזכרון
+      localStorage.setItem("currentUser", username);
+      if (!localStorage.getItem(username)) {
+        localStorage.setItem(username, JSON.stringify({ score: 0 }));
+      }
+      flag = true;
+    }
+  });
+  if (flag) {
     document.querySelector(".wolcomback").style.display = "block";
     setTimeout(function () {
-      username.value = "";
+      username = "";
       window.location.href = "/html/landingpage.html";
     }, 2000);
   } else {
@@ -87,7 +94,7 @@ signp2_b.addEventListener("click", function (e) {
   };
 
   //שליפת המערך מהזכרון הפנימי
-  usersData = JSON.parse(localStorage.getItem("usersData") || []);
+  usersData = JSON.parse(localStorage.getItem("usersData"))||[];
 
   //הכנסת המשתמש לזכרון
   usersData.push(user);
@@ -105,7 +112,7 @@ signp2_b.addEventListener("click", function (e) {
 
 //פונקציית בדיקת שם משתמש יחודי
 function validateUsername(username) {
-  usersData = JSON.parse(localStorage.getItem("usersData") || []);
+  usersData = JSON.parse(localStorage.getItem("usersData"))||[];
 
   for (let index = 0; index < usersData.length; index++) {
     const user = usersData[index];

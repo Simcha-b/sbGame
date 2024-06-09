@@ -1,0 +1,17 @@
+#gameBoard {
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+#gameBoard td {
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    padding: 0;
+}
+
+#score {
+    margin-top: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}

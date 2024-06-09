@@ -8,24 +8,42 @@
     <title>hngman</title>
   </head>
   <body>
+    <header>
+      <div class="user-info">
+        <span id="username">שם משתמש: משתמש123</span>
+        <span id="score">ציון: 1000</span>
+      </div>
+      <h1>hangman!!</h1>
+      <div class="actions">
+        <button class="hb" id="logout">התנתקות</button>
+        <button class="hb" id="home">חזרה לעמוד הבית</button>
+      </div>
+    </header>
     <div id="game-inst">
       <div id="options-container">
-        <h1>hangman!!</h1>
-        <p class="insroction">
+        <button id="insroction_b" class="hb">הוראות משחק</button>
+        <div class="insroction" style="display: none;">
           <strong>הוראות המשחק</strong>
-        </p>
-        <p>יש לנחש את אותיות המילה בלחיצה על המקש המתאים במקלדת</p>
-        <p>אם האות נמצאת במילה היא תכנס למקום המתאים</p>
-        <h3>(אורך המילה) בחר את רמת המשחק</h3>
-        <button class="easy">קל</button>
-        <button class="medium">בינוני</button>
-        <button class="Hard">קשה</button>
-      </div>
+          <p>יש לנחש את אותיות המילה בלחיצה על המקש המתאים במקלדת</p>
+          <p>אם האות נמצאת במילה היא תכנס למקום המתאים</p>
+          <p>...אם לא האיש יתקרב לעמוד התלייה</p>
+        </div>
+        
+
+        <label for="level"></label>
+        <div>
+          <select name="level" id="levels" class="hb">
+            <option value="" disabled selected>בחר רמה</option>
+            <option value="easy">רמה 1</option>
+            <option value="medium">רמה 2</option>
+            <option value="Hard">רמה 3</option>
+          </select>
+        </div>
+
     </div>
     <div class="game-container">
       <div id="letter-container"></div>
       <div id="user-input-section"></div>
-      <!-- <div id="hangman-section"> -->
       <div id="hangman-container">
         <div id="gallows">
           <div class="part vertical-pole"></div>
@@ -55,6 +73,8 @@
         </div>
       </div>
     </div>
+    <audio id="winSound" src="/saunds/win.wav"></audio>
+    <audio id="loseSound" src="/saunds/loss.mp3"></audio>
     <script src="/js/hangman.js"></script>
   </body>
 </html>
