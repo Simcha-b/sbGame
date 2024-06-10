@@ -18,17 +18,17 @@ login_b.addEventListener("click", function (e) {
   let username = document.querySelector("#user").value;
   let password = document.querySelector("#password1").value;
 
-  usersData = JSON.parse(localStorage.getItem("usersData"))||[];
+  usersData = JSON.parse(localStorage.getItem("usersData")) || [];
 
   //אם שם משתמש וסיסמה נכונים מעבר לדף נחיתה
   let flag = false;
   usersData.forEach((user) => {
     if (user.username === username && user.password === password) {
       //הכנסת משתמש נוכחי לזכרון
-      localStorage.setItem("currentUser", username);
-      if (!localStorage.getItem(username)) {
-        localStorage.setItem(username, JSON.stringify({ score: 0 }));
-      }
+      localStorage.setItem(
+        "currentUser",
+        JSON.stringify([username, user.score])
+      );
       flag = true;
     }
   });
@@ -66,7 +66,8 @@ const signpSuccess = document.querySelector(".signpSuccess");
 
 //פונקציית יצירת משתמש והכנסה לזכרון
 signp2_b.addEventListener("click", function (e) {
-  e.preventDefault();
+  const signUpForm = document.forms["sign-up"];
+  if (signUpForm.reportValidity()) e.preventDefault();
 
   //בדיקה האם קיים כבר כזה משתמש
   if (!validateUsername(document.querySelector("#username").value)) {
@@ -94,7 +95,7 @@ signp2_b.addEventListener("click", function (e) {
   };
 
   //שליפת המערך מהזכרון הפנימי
-  usersData = JSON.parse(localStorage.getItem("usersData"))||[];
+  usersData = JSON.parse(localStorage.getItem("usersData")) || [];
 
   //הכנסת המשתמש לזכרון
   usersData.push(user);
@@ -112,7 +113,7 @@ signp2_b.addEventListener("click", function (e) {
 
 //פונקציית בדיקת שם משתמש יחודי
 function validateUsername(username) {
-  usersData = JSON.parse(localStorage.getItem("usersData"))||[];
+  usersData = JSON.parse(localStorage.getItem("usersData")) || [];
 
   for (let index = 0; index < usersData.length; index++) {
     const user = usersData[index];
@@ -128,18 +129,3 @@ function validatePassword(password) {
   const regex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^&*]).{6,}$/;
   return regex.test(password);
 }
-
-// function validatePassword(password) {
-//   if (password.length < 6) return false;
-//   if (
-//     password.includes("!") ||
-//     password.includes("@") ||
-//     password.includes("#") ||
-//     password.includes("$") ||
-//     password.includes("^") ||
-//     password.includes("&") ||
-//     password.includes("*")
-//   )
-//     return true;
-//   return false;
-// }

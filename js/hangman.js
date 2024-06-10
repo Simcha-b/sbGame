@@ -6,14 +6,13 @@ if (!localStorage.getItem("currentUser")) {
 }
 
 //פרטי משתמש נוכחי
-const currentUser = localStorage.getItem("currentUser");
-const userData = JSON.parse(localStorage.getItem(currentUser));
+const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
 // הצגת פרטי המשתמש
 let username = document.querySelector("#username");
 let score = document.querySelector("#score");
-username.textContent = `plyaer: ${currentUser}`;
-score.textContent = `score: ${userData.score}`;
+username.textContent = `plyaer: ${currentUser[0]}`;
+score.textContent = `score: ${currentUser[1]}`;
 
 //ניתוק
 document.getElementById("logout").addEventListener("click", function () {
@@ -109,7 +108,9 @@ function play2(e) {
     //נצחון
     if (cntwin == word.length) {
       win.style.display = "block";
-      updateScore(userData.score + 5);
+      currentUser[1] += 5;
+      let newScore = currentUser[1];
+      updateScore(newScore);
       playWinSound();
     }
   } else {
@@ -173,14 +174,27 @@ function resetGame() {
   mistakes = 0;
   cntwin = 0;
 }
+
 //עדכון הציון
 function updateScore(newScore) {
-  const currentUser = localStorage.getItem("currentUser");
-  if (currentUser) {
-    let userData = JSON.parse(localStorage.getItem(currentUser));
-    userData.score = newScore;
-    localStorage.setItem(currentUser, JSON.stringify(userData));
+  const users = JSON.parse(localStorage.getItem("usersData"));
+
+  // עדכון הציון של המשתמש הנוכחי
+  for (let user of users) {
+    if (user.username === currentUser[0]) {
+      user.score = newScore;
+      break;
+    }
   }
+  // שמירת המערך המעודכן 
+  localStorage.setItem("usersData", JSON.stringify(users));
+
+  // עדכון הציון של המשתמש הנוכחי 
+  currentUser.score = newScore;
+  localStorage.setItem("currentUser", JSON.stringify(currentUser));
+
+  // עדכון הצגת הציון על המסך
+  score.textContent = `score: ${currentUser.score}`;
 }
 
 //play win
