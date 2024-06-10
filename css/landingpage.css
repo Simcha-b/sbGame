@@ -25,7 +25,7 @@ header {
     display: flex;
     gap: 20px;
     font-size: large;
-    color: #d32f2f;
+    color: #602fd3;
 }
 
 .actions {
@@ -69,16 +69,79 @@ main {
 }
 
 .game-link {
-    background-color: #2196F3;
-    color: white;
+    color: rgb(44, 41, 41);
     padding: 50px;
     text-align: center;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 30px;
+    border: black 2px solid;
     border-radius: 10px;
     transition: background-color 0.3s ease;
 }
-
-.game-link:hover {
+.a{
+    background-color: #d32f2f;
+}
+.b{
     background-color: #1976D2;
+}
+.c{
+    background-color: #4CAF50;
+}
+.d{
+    background-color: #602fd3;
+}
+.game-link:hover {
+    opacity: 40%;
+}
+
+/* סגנון כללי לטבלה */
+.leaderboard {
+    margin: 20px auto;
+    width: 80%;
+    text-align: center;
+}
+
+.leaderboard h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.leaderboard table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.leaderboard th, .leaderboard td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.leaderboard th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.leaderboard tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.leaderboard tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+.leaderboard td {
+    font-size: 18px;
+}
+
+.leaderboard tr:first-child th {
+    border-top: none;
+}
+
+.leaderboard tr:last-child td {
+    border-bottom: none;
+}
+
+.leaderboard tr:hover {
+    background-color: #f1f1f1;
 }
